@@ -1,0 +1,33 @@
+/* pages/address/addressForm/index.wxss */
+page {
+  background-color: #f8f8f8;
+}
+
+.gray-text {
+  color: #A9A9A9;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 150rpx 1fr;
+  background-color: white;
+  height: 110rpx;
+  align-content: center;
+  padding: 0 20rpx 0 20rpx;
+}
+
+.grid-left {
+  grid-column-start: 1;
+  display: flex;
+  align-items: center;
+}
+
+.grid-right {
+  grid-column-start: 2;
+}
+
+.submit {
+  margin: 30rpx;
+  background-color: red;
+  color: white;
+}

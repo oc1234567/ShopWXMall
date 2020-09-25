@@ -1,0 +1,70 @@
+/* pages/myCenter/index/index.wxss */
+.login {
+  height: 120rpx;
+}
+
+.user-info {
+  height: 220rpx;
+}
+
+.user-avatar-name {
+  display: flex;
+  align-items: center;
+  height: 120rpx;
+}
+
+.user-avatar {
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 60rpx;
+}
+
+.user-name {
+  margin-left: 20rpx;
+  font-size: 32rpx;
+}
+
+.user-grade {
+  height: 80rpx;
+  line-height: 80rpx;
+}
+
+.order-list-view {
+  display: flex;
+}
+
+.order-list {
+  width: 150rpx;
+  height: 100rpx;
+  line-height: 100rpx;
+  text-align: center;
+}
+
+.list-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.list-item-title {
+  height: 100rpx;
+  line-height: 100rpx;
+}
+
+.padding-left {
+  padding-left: 25rpx;
+}
+
+.padding-right {
+  padding-right: 25rpx;
+}
+
+.big-text {
+  font-size: 32rpx;
+}
+
+.small-text {
+  font-size: 28rpx;
+  color: silver;
+}
+

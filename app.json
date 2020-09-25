@@ -1,0 +1,60 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/category/index/index",
+    "pages/category/categoryList/index",
+    
+    "pages/myCenter/index/index",
+    "pages/address/addressForm/index",
+    "pages/goodDetail/index",
+    "pages/activeDetail/index",
+    "pages/checkout/index",
+    "pages/address/addressList/index",
+    "pages/myCenter/orderList/index",
+    "pages/cart/index"
+    
+  ],
+  "window": {
+    "backgroundTextStyle": "dark",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "仿网易严选",
+    "navigationBarTextStyle": "black",
+    "enablePullDownRefresh": true
+  },
+  "tabBar": {
+    "color": "#000",
+    "selectedColor": "#f00",
+    "list": [
+      {
+        "text": "首页",
+        "iconPath": "/static/images/ic_menu_choice_nor.png",
+        "selectedIconPath": "/static/images/ic_menu_choice_pressed.png",
+        "pagePath": "pages/index/index"
+      },
+      {
+        "text": "分类",
+        "iconPath": "/static/images/ic_menu_sort_nor.png",
+        "selectedIconPath": "/static/images/ic_menu_sort_pressed.png",
+        "pagePath": "pages/category/index/index"
+      },
+      {
+        "text": "购物车",
+        "iconPath": "/static/images/ic_menu_shoping_nor.png",
+        "selectedIconPath": "/static/images/ic_menu_shoping_pressed.png",
+        "pagePath": "pages/cart/index"
+      },
+      {
+        "text": "我的",
+        "iconPath": "/static/images/ic_menu_me_nor.png",
+        "selectedIconPath": "/static/images/ic_menu_me_pressed.png",
+        "pagePath": "pages/myCenter/index/index"
+      }
+    ]
+  },
+  "networkTimeout": {
+    "request": 10000,
+    "downloadFile": 10000
+  },
+  "debug": true,
+  "sitemapLocation": "sitemap.json"
+}

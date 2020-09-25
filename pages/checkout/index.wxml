@@ -1,0 +1,36 @@
+<!--pages/checkout/index.wxml-->
+<view wx:if="{{is_ready}}"> 
+<view  wx:if="{{user_addresses.length > 0}}" class="address-wrapper" bindtap="handleToAddressList">
+  <mp-icon icon="location" color="#484848" size="{{21}}" class="address-location-icon"></mp-icon>
+  <text class="address-shipping-user-name address-text">{{addr_selected.shipping_user_name}}</text>
+  <text class="address-telephone address-text">{{addr_selected.telephone}}</text>
+  <text class="address-position address-text">{{addr_selected.province}}{{addr_selected.city}}{{addr_selected.district}}{{addr_selected.address}}  ({{addr_selected.zip}})</text>
+  <mp-icon icon="arrow" color="#a8a8a8" size="{{11}}" class="address-arrow-icon"></mp-icon>
+</view>
+<button wx:else bindtap="handleToAddAddress">add New Address</button>
+</view>
+<view style="height: 20rpx"></view>
+<view style="display: flex;align-items: center; padding: 20rpx; padding-left: 30rpx; background-color: white">
+    <mp-icon icon="shop" color="#484848" size="{{18}}"></mp-icon>
+    <text class="shop-list-text" space="nbsp">  购物清单</text>
+  </view>
+<view wx:for="{{products}}" wx:for-item="product" class="shop-product-wrapper hairline hairline-top" wx:key="id">
+  <image class="shop-product-image" src="{{product.img}}" style="width:210rpx; height:210rpx"></image>
+  <text class="shop-product-name product-name text">{{product.name}}</text>
+  <text class="shop-product-size-color gray-text">{{product.size_name}}/{{product.color_name}}</text>
+  <text class="shop-product-price price">${{product.price}}</text>
+  <text class="shop-product-num">x{{product.num}}</text>
+</view>
+<view class="grid  hairline hairline-top">
+  <text class="grid-left">买家留言</text><input class="grid-right" type="text" placeholder="给卖家留言(20字以内)" placeholder-class="gray-text"/>
+</view>
+<view class="hairline hairline-top" style="height: 110rpx; background-color: white; display: flex; align-items: center; justify-content: flex-end; padding: 0 20rpx 0 20rpx;">
+  <text space="nbsp">共{{products_num}}件商品   </text><text>合计：</text><text class="price">{{payment}}</text>
+</view>
+<view class="page-bottom-submit">
+  <text style="font-size: 35rpx;">实付：</text>
+  <text space="nbsp" class="pay-price">${{payment}}  </text>
+  <view bindtap="handleSubmitOrder" class="submit-btn">提交订单</view>
+</view>
+
+ 

@@ -1,0 +1,14 @@
+<!--pages/category/index.wxml-->
+<view class="wrapper">
+  <view class="one-category">
+    <view wx:for="{{categories}}" wx:for-item="category" wx:key="id" class="category-item" bindtap="handleChangeCategoryIndex" data-index="{{index}}">{{category.name}}</view>
+  </view>
+  <view class="content">
+    <view wx:for="{{cur_sub_categories}}" wx:for-item="sub_category" wx:key="id" class="sub-category-item" bindtap="handleToProductsList" data-id="{{sub_category.id}}">
+      <block wx:if="{{sub_category.pic}}">
+        <image src="{{sub_category.pic}}" class="sub-category-item-image"></image>
+      </block>
+      {{sub_category.name}}
+    </view>
+  </view>
+</view>

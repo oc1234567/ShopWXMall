@@ -1,0 +1,5 @@
+{
+  "usingComponents": {
+    "buy-modal": "/components/show-buy-modal/show-buy-modal"
+  }
+}

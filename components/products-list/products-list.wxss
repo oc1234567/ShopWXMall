@@ -1,0 +1,29 @@
+/* components/products-list.wxss */
+.products-list-view {
+  display: grid;
+  grid-template-columns: 345rpx 345rpx;
+  grid-auto-rows: 495rpx;
+  justify-content: space-around;
+}
+
+.product-view {
+  background-color: springgreen;
+}
+
+.product-image {
+  width: 345rpx;
+  height: 345rpx;
+}
+
+.product-name {
+  width: 345rpx;
+  height: 90rpx;
+  /* background-color: tomato; */
+}
+
+.product-price {
+  width: 345rpx;
+  height: 60rpx;
+  text-align: end;
+  /* background-color: yellow; */
+}

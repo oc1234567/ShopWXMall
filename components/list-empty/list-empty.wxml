@@ -1,0 +1,5 @@
+<!--components/list-empty.wxml-->
+<view class="empty">
+  <image src="/static/images/my_course_empty.png" class="empty-img"></image>
+  <text class="empty-text">{{empty-title}}</text>
+</view>

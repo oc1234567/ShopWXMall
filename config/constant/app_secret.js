@@ -1,0 +1,1 @@
+export const AppSecret = 'fbb6af06aa195473703dd61b232f5e79';

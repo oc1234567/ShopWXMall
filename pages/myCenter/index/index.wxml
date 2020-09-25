@@ -1,0 +1,27 @@
+<!--pages/myCenter/index/index.wxml-->
+<view wx:if="{{is_logined}}" class="login">
+  <button>登录</button>
+</view>
+<view wx:else class="user-info padding-left">
+  <view class="user-avatar-name">
+    <image src="{{user_avatar}}" class="user-avatar"></image>
+    <text class="user-name">{{user_name}}</text>
+  </view>
+  <view class="user-grade">
+    <text>{{user_grade}}</text>
+    <text>当前积分：{{user_grade_integral}}，还差 {{user_grade_integral_reduce}} 分</text>
+  </view>
+</view>
+<view class="hairline hairline-top">
+  <view class="list-item padding-left padding-right hairline hairline-bottom" bindtap="handleToOrderList" data-index="{{0}}">
+    <text class="list-item-title  big-text">订单信息</text>
+    <view><text class="list-item-title small-text" space="nbsp">查看全部订单 </text><mp-icon icon="arrow" color="#ebedf0" size="{{9}}"></mp-icon></view>
+  </view>
+  <view class="order-list-view">
+    <view wx:for="{{['待付款','待发货','待收货','待评价','退款/售后']}}" wx:for-item="title" wx:key="*this" class="order-list" bindtap="handleToOrderList" data-index="{{index+1}}">{{title}}</view>
+  </view>
+</view>
+<view class="hairline hairline-top">
+  <view class="list-item padding-left padding-right hairline hairline-bottom"><text class="list-item-title big-text">我的优惠劵</text></view>
+  <view class="list-item padding-left padding-right hairline hairline-bottom"><text class="list-item-title big-text">我的积分</text><view><text class="list-item-title small-text" space="nbsp">{{user_grade_integral}} </text><mp-icon icon="arrow" color="#ebedf0" size="{{9}}"></mp-icon></view></view>
+</view>

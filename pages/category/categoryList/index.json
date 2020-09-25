@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "products-list": "../../../components/products-list/products-list",
+    "empty-view": "../../../components/list-empty/list-empty"
+  }
+}

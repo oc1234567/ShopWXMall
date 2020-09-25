@@ -1,0 +1,13 @@
+<!--pages/activeDetail/index.wxml-->
+<block wx:if="{{is_ready}}">
+  <block wx:if="{{active_products}}">
+    <products-list products="{{active_products}}">
+
+    </products-list>
+  </block>
+  <empty-view wx:else>
+    
+  </empty-view>
+</block>
+
+

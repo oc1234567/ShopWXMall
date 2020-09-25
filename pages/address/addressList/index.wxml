@@ -1,0 +1,16 @@
+<!--pages/address/addressList/index.wxml-->
+<view wx:if="{{addresses.length > 0}}">
+  <view wx:for="{{addresses}}" wx:key="index" wx:for-item="address" data-index="{{index}}" bindtap="handleChangeSelectedAddr" class="wrapper" style="margin-bottom: 10rpx;">
+    <text class="text name">{{address.shipping_user_name}}  </text>
+    <text class="text tel">{{address.telephone}}</text>
+    <text class="text addr hairline hairline-bottom">{{address.city}}{{address.district}}{{address.address}}  {{address.zip}} {{address.is_default}}</text>
+    <view class="default">
+      <block wx:if="{{address.is_default == 1}}"><mp-icon icon="done2" color="red" size="{{16}}"></mp-icon> <text style="color: red" space="nbsp" class="gray-text"> 默认地址</text></block>
+      <block wx:else><mp-icon icon="done2" color="gray" size="{{16}}"></mp-icon> <text style="color: gray" space="nbsp" class="gray-text"> 默认地址</text></block>
+    </view>
+    <view class="edit" catchtap="handleEditAddr" data-index="{{index}}"><mp-icon icon="pencil" color="#a8a8a8" size="{{16}}"></mp-icon><text space="nbsp" class="gray-text"> 编辑</text></view>
+    <view class="delete" catchtap="handleDeleteAddr" data-index="{{index}}"><mp-icon icon="delete" color="#a8a8a8" size="{{16}}"></mp-icon><text space="nbsp" class="gray-text"> 删除</text></view>
+  </view>
+  
+  <button bindtap="handleAddAddr" class="add">新增地址</button>
+</view>

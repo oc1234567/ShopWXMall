@@ -1,0 +1,78 @@
+page {
+  background-color: #f8f8f8;
+}
+
+.wrapper {
+  display: grid;
+  grid-template-columns: minmax(80rpx, auto) minmax(80rpx, 1fr) 150rpx 150rpx;
+  grid-template-rows: 50rpx 60rpx 80rpx;
+  background-color: white;
+}
+
+.name {
+  grid-column-start: 1;
+}
+
+.tel {
+  grid-column-start: 2;
+}
+
+
+.addr {
+  grid-column-start: 1;
+  grid-column-end: 5;
+  grid-row-start: 2;
+}
+
+.edit {
+  grid-column-start: 3;
+  grid-row-start: 3;
+  height: 80rpx;
+  display: flex;
+  align-items: center;
+}
+
+.delete {
+  grid-column-start: 4;
+  grid-row-start: 3;
+  height: 80rpx;
+  display: flex;
+  align-items: center;
+}
+
+.default {
+  grid-column-start: 1;
+  grid-column-end: 3;
+  grid-row-start: 3;
+  height: 80rpx;
+  display: flex;
+  align-items: center;
+}
+
+.gray-text {
+  font-size: 26rpx;
+  color: #656565;
+}
+
+.text {
+  font-size: 28rpx;
+  color: #484848;
+}
+
+.name {
+  font-size: 30rpx;
+}
+
+.tel {
+  font-size: 28rpx;
+}
+
+.addr {
+  font-size: 26rpx;
+}
+
+.add {
+  margin: 30rpx;
+  background-color: red;
+  color: white;
+}

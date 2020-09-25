@@ -1,0 +1,151 @@
+/* pages/mycenter/orderList/index.wxss */
+page {
+  background-color: #f8f8f8;
+}
+
+.top-title-view {
+  display: flex;
+  flex-direction: row;
+  height: 105rpx;
+  background-color: white;
+}
+
+.top-title {
+  width: 150rpx;
+  height: 100rpx;
+  line-height: 100rpx;
+  text-align: center;
+}
+
+.top-title-bottom {
+  width: 120rpx;
+  height: 5rpx;
+  background-color: red;
+  margin-left: 15rpx;
+  margin-right: 15rpx;
+}
+
+.order-view {
+  margin-top: 20rpx;
+  background-color: white;
+}
+
+.order-info-top {
+  height: 100rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.order-time {
+  color: lightgray;
+}
+
+.order-status {
+  color: red;  
+}
+
+.order-product {
+  display: grid;
+  grid-template-columns: 150rpx 20rpx 1fr 120rpx;
+  grid-template-rows: 88rpx 40rpx 22rpx;
+}
+
+.order-product-image {
+  grid-row-start: 1;
+  grid-row-end: 4;
+  grid-column-start: 1;
+}
+
+.order-product-name {
+  grid-row-start: 1;
+  grid-column-start: 3;
+}
+
+.order-product-size-color {
+  grid-row-start: 2;
+  grid-column-start: 3;
+}
+
+.order-product-price {
+  grid-row-start: 1;
+  grid-column-start: 4;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.order-product-num {
+  grid-row-start: 2;
+  grid-column-start: 4;
+  display: flex;
+  justify-content: flex-end; 
+}
+
+.order-info-bottom {
+  height: 100rpx;
+  line-height: 100rpx;
+  text-align: end;
+}
+
+.order-delete {
+  height: 100rpx;
+}
+
+.order-delete-btn {
+  width: 130rpx;
+  height: 80rpx;
+  border-color: black;
+  border-width: 1rpx;
+  border-radius: 3rpx;
+}
+
+.order-product {
+  padding-top: 20rpx;
+  padding-bottom: 20rpx;
+}
+
+.product-name {
+  display: -webkit-box;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: break-all;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.gray-text {
+  color: #A9A9A9;
+}
+
+.color-size-text {
+  font-size: smaller;
+}
+
+.num-text {
+  color: #A9A9A9;
+}
+
+.price-text {
+  font-weight: 600;
+}
+
+.payment-currency-text {
+  color: red;
+  font-size: 22rpx;
+  font-weight: 500;
+}
+
+.payment-text {
+  color: red;
+  font-size: 32rpx;
+  font-weight: 500;
+}
+
+.padding-left {
+  padding-left: 25rpx;
+}
+
+.padding-right {
+  padding-right: 25rpx;
+}
+

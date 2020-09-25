@@ -1,0 +1,30 @@
+<!--pages/address/addressForm/index.wxml-->
+<form bindsubmit="handleSubmit">
+  <view class="grid hairline hairline-top"><label for="shipping_user_name" class="grid-left">收货人：</label><input class="grid-right input" type="text" name="shipping_user_name" id="shipping_user_name" placeholder="收货人" value="{{shipping_user_name}}" placeholder-class="gray-text"/></view>
+  <view class="grid hairline hairline-top">
+    <label for="telephone" class="grid-left">手机号码：</label><input class="grid-right input" type="number" name="telephone" id="telephone" placeholder="联系电话" value="{{telephone}}" placeholder-class="gray-text"/>
+  </view>
+  <view class="grid hairline hairline-top">
+    <label for="region" class="grid-left">省/市/区：</label>
+  <picker mode="region" class="grid-right" bindchange="handleRegionChange" custom-item="{{customItem}}" value="{{region}}" name="region">
+    <block wx:if="{{region[0] === '请选择'}}">
+      <view class="gray-text">{{region[0]}}，{{region[1]}}，{{region[2]}}</view>
+    </block>
+    <block wx:else>
+      <view>{{region[0]}}，{{region[1]}}，{{region[2]}}</view>
+    </block>
+  </picker>
+  </view>
+  <view class="grid hairline hairline-top">
+    <label for="address" class="grid-left">地址：</label><input class="grid-right input" type="text" name="address" id="address" placeholder="道路，楼牌号等" value="{{address}}" placeholder-class="gray-text"/>
+  </view>
+  <view class="grid hairline hairline-top">
+    <label for="zip" class="grid-left">邮编：</label><input class="grid-right input" type="text" name="zip" id="zip" placeholder="邮政编码（选填）" value="{{zip}}" placeholder-class="gray-text"/>
+  </view>
+  <view class="grid hairline hairline-top">
+    <label for="is_default" class="grid-left">默认地址：</label><switch class="grid-right" name="address_is_default" checked="{{is_default === 1}}"></switch>
+  </view>
+  <view style="height: 20rpx"></view>
+  <button form-type="submit" class="submit">保存</button>
+</form>
+

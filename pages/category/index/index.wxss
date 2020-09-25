@@ -1,0 +1,33 @@
+/* pages/category/index.wxss */
+.wrapper {
+  display: flex;
+}
+
+.one-category {
+  width: 120rpx;
+}
+
+.category-item {
+  height: 80rpx;
+  line-height: 80rpx;
+  text-align: center;
+}
+
+.sub-category-item {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  background-color: seagreen;
+  margin: 20rpx;
+}
+
+.sub-category-item-image {
+  width: 150rpx;
+  height: 150rpx;
+}
+
+.content {
+  flex: 1;
+  display: flex;
+  background-color: salmon;
+}

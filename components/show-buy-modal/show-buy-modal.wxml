@@ -1,0 +1,44 @@
+<!--components/show-buy-modal.wxml-->
+
+<view class="product_info_view">
+  <image class="product_img_view" src="{{good_info.picUrl}}" style="width:210rpx; height:210rpx"></image>
+  <view class="product_price_view">
+    <view>
+      <text space="nbsp" class="price">会员价 {{good_info.price}}</text>
+    </view>
+    <view>
+      <text wx:if="{{count !== 0}}" class="gray_text">库存{{count}}件</text>
+    </view>
+    <view>
+      <text wx:if="{{selected_color_name.length === 0 && selected_size_name.length === 0}}" space="nbsp" class="gray_text">请选择 颜色|尺码</text>
+    <text wx:else>{{selected_color_name}}|{{selected_size_name}}</text>
+    </view>
+  </view>
+  <view class="product_close"><mp-icon icon="close" color="#BCBCBC" size="{{15}}"></mp-icon></view>
+</view>
+<!--选择尺码-->
+<view>
+  <text>尺码</text>
+</view>
+<button wx:for="{{good_info.sizeNames}}" wx:key="*this" size="mini" style="margin: 10rpx; background:{{item.id === selected_size_id ? button_select_color : button_normal_color}}; color:{{item.id === selected_size_id ? text_select_color : text_normal_color}};" bindtap="handleChangeSize" data-size="{{item}}">
+  {{item.name}}
+</button>
+<!--选择颜色-->
+<view>
+  <text>颜色分类</text>
+</view>
+<button wx:for="{{good_info.colorNames}}" wx:key="*this" size="mini" style="margin: 10rpx; background:{{item.id === selected_color_id ? button_select_color : button_normal_color}}; color:{{item.id === selected_color_id ? text_select_color : text_normal_color}};" bindtap="handleChangeColor" data-color="{{item}}" >
+  {{item.name}}
+</button>
+<view class="num_view">
+  <text>数量：</text>
+  <view>
+    <text class="reduce_num" bindtap="handleReduceNum">-</text>
+    <text class="num"><text>{{num}}</text></text>
+    <text class="add_num" bindtap="handleAddNum">+</text>
+  </view>
+</view>
+<view class="buy_bottom_view">
+  <view class="add_cart" bindtap="handleAddCart"><text>加入购物车</text></view>
+  <view class="imd_buy" bindtap="handleToBuy"><text>立即购买</text></view>
+</view>

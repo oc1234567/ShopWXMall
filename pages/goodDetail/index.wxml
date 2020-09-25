@@ -1,0 +1,58 @@
+<!--pages/goodDetail/index.wxml-->
+<!--轮播组件-->
+<swiper indicator-dots="true" autoplay="true" interval="2000" circular="true">
+  <block wx:for="{{good_info.picUrls}}" wx:key="*this">
+    <swiper-item>
+      <image src="{{item}}"></image>
+    </swiper-item>
+  </block>
+</swiper>
+<text>{{good_info.id}}</text>
+<text>{{good_info.name}}</text>
+<swiper indicator-dots="true" autoplay="true" interval="2000" circular="true">
+  <block wx:for="{{good_info.picUrls}}" wx:key="*this">
+    <swiper-item>
+      <image src="{{item}}"></image>
+    </swiper-item>
+  </block>
+</swiper>
+<text>{{good_info.id}}</text>
+<text>{{good_info.name}}</text>
+<swiper indicator-dots="true" autoplay="true" interval="2000" circular="true">
+  <block wx:for="{{good_info.picUrls}}" wx:key="*this">
+    <swiper-item>
+      <image src="{{item}}"></image>
+    </swiper-item>
+  </block>
+</swiper>
+<text>{{good_info.id}}</text>
+<text>{{good_info.name}}</text>
+<swiper indicator-dots="true" autoplay="true" interval="2000" circular="true">
+  <block wx:for="{{good_info.picUrls}}" wx:key="*this">
+    <swiper-item>
+      <image src="{{item}}"></image>
+    </swiper-item>
+  </block>
+</swiper>
+<text>{{good_info.id}}</text>
+<text>{{good_info.name}}</text>
+<swiper indicator-dots="true" autoplay="true" interval="2000" circular="true">
+  <block wx:for="{{good_info.picUrls}}" wx:key="*this">
+    <swiper-item>
+      <image src="{{item}}"></image>
+    </swiper-item>
+  </block>
+</swiper>
+<text>{{good_info.id}}</text>
+<text>{{good_info.name}}</text>
+
+<!--固定底部按钮-->
+<view class="bottom_view"><button class="bottom_btn" bindtap="handleOpenModal" hover-class="none">立即购买</button></view>
+
+<!--遮罩层-->
+<view class="cover_screen" bindtap="handleHideModal" wx:if="{{showModalStatus}}"></view>
+
+<!--Modal 弹框-->
+<view wx:if="{{showModalStatus}}" class="buy_box" animation="{{animationData}}">
+  <buy-modal good_info="{{good_info}}" bind:toBuy="handleToBuy" bind:dismiss="handleHideModal"></buy-modal>
+</view>

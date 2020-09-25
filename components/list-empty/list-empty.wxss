@@ -1,0 +1,18 @@
+/* components/list-empty.wxss */
+
+.empty {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 750rpx;
+}
+
+.empty-img {
+  width: 375rpx;
+  height: 375rpx;
+}
+
+.empty-text {
+  margin-top: 20rpx;
+}

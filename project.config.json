@@ -1,0 +1,86 @@
+{
+  "description": "项目配置文件。",
+  "setting": {
+    "urlCheck": false,
+    "es6": true,
+    "enhance": false,
+    "postcss": true,
+    "preloadBackgroundData": false,
+    "minified": true,
+    "newFeature": true,
+    "coverView": true,
+    "nodeModules": false,
+    "autoAudits": false,
+    "showShadowRootInWxmlPanel": true,
+    "scopeDataCheck": false,
+    "uglifyFileName": false,
+    "checkInvalidKey": true,
+    "checkSiteMap": true,
+    "uploadWithSourceMap": true,
+    "compileHotReLoad": false,
+    "useMultiFrameRuntime": false,
+    "useApiHook": true,
+    "babelSetting": {
+      "ignore": [],
+      "disablePlugins": [],
+      "outputPath": ""
+    },
+    "useIsolateContext": true,
+    "useCompilerModule": true,
+    "userConfirmedUseCompilerModuleSwitch": false,
+    "packNpmManually": false,
+    "packNpmRelationList": []
+  },
+  "compileType": "miniprogram",
+  "libVersion": "2.7.3",
+  "appid": "wx3cc691f4c5e9ceec",
+  "projectname": "wx-mall",
+  "simulatorType": "wechat",
+  "simulatorPluginLibVersion": {},
+  "condition": {
+    "search": {
+      "current": -1,
+      "list": []
+    },
+    "conversation": {
+      "current": -1,
+      "list": []
+    },
+    "plugin": {
+      "current": -1,
+      "list": []
+    },
+    "game": {
+      "list": []
+    },
+    "miniprogram": {
+      "current": -1,
+      "list": [
+        {
+          "id": 0,
+          "name": "选择优惠券",
+          "pathName": "pages/shopping/selCoupon/selCoupon",
+          "query": "isBuy=false"
+        },
+        {
+          "id": -1,
+          "name": "订单界面",
+          "pathName": "pages/shopping/checkout/checkout",
+          "query": "isBuy=true"
+        },
+        {
+          "id": -1,
+          "name": "我的优惠券",
+          "pathName": "pages/ucenter/coupon/coupon",
+          "query": "isBuy=true"
+        },
+        {
+          "id": -1,
+          "name": "我的订单",
+          "pathName": "pages/ucenter/order/order",
+          "query": ""
+        }
+      ]
+    }
+  }
+}

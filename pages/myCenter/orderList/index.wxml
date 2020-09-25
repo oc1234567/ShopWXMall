@@ -1,0 +1,40 @@
+<!--pages/mycenter/orderList/index.wxml-->
+<view class="top-title-view">
+  <view wx:for="{{top_titles}}" wx:for-item="title" wx:key="*this" class="top-title" style="color:{{top_titles[cur_top_index] === title ? cur_title_color : normal_title_color}}" bindtap="handleChangeTopTitle" data-index="{{index}}">
+    {{title}}
+    <view class="top-title-bottom" hidden="{{top_titles[cur_top_index] !== title}}"></view>
+  </view>
+</view>
+<block wx:if="{{is_ready}}">
+  <block wx:if="{{cur_order_list.length > 0}}">
+    <view wx:for="{{cur_order_list}}" wx:for-item="order" wx:key="index" class="order-view">
+      <view class="order-info-top padding-left padding-right">
+        <view>
+          <text>订单id: </text>
+          <text class="order-time" space="nbsp"> {{order.id}}</text>
+        </view>
+        <text class="order-status">订单状态：{{order_status[order.status]}}</text>
+      </view>
+      <view wx:for="{{order.products}}" wx:for-item="product" wx:key="index" class="order-product padding-left padding-right hairline hairline-bottom">
+        <image class="order-product-image" src="{{product.image}}" style="width: 150rpx; height: 150rpx"></image>
+        <text class="order-product-name product-name">{{product.name}}</text>
+        <text class="order-product-size-color gray-text color-size-text">{{product.color_name}}/{{product.size_name}}</text>
+        <text class="order-product-price price-text">${{product.price}}</text>
+        <text class="order-product-num num-text">x{{product.num}}</text>
+      </view>
+      <view class="order-info-bottom padding-right">
+        <!-- <text space="nbsp"></text>
+        <text></text> -->
+        共{{order.products_num}}商品 实付：<text class="payment-currency-text">$</text><text class="payment-text">{{order.payment_money}}</text>
+      </view>
+      <view class="order-delete">
+        <view class="order-delete-btn" bindtap="handleDeleteOrder" data-orderid="{{order.id}}">删除订单</view>
+      </view>
+    </view>
+  </block>
+  <empty-view wx:else ></empty-view>
+  <view class="empty">
+    <image src="/static/images/my_course_empty.png" class="empty-img"></image>
+    <text class="empty-text">暂无订单</text>
+  </view>
+</block>

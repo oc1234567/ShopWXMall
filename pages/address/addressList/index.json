@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "mp-icon": "../../../components/we-icon/icon"
+  }
+  
+}

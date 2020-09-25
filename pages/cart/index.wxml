@@ -1,0 +1,28 @@
+<!--pages/cart/index.wxml-->
+<block wx:if="{{cart_goods.length > 0}}">
+  <view wx:for="{{cart_goods}}" wx:for-item="product" wx:key="id" class="product_wrapper">
+    <view class="product_select_icon" bindtap="handleSelectProduct" data-index="{{index}}">
+      <mp-icon wx:if="{{selected_state[index]}}" icon="done2" color="red" size="{{16}}"></mp-icon>
+      <mp-icon wx:else icon="done2" color="gray" size="{{16}}"></mp-icon>
+    </view>
+    <image class="product_image" src="{{product.img}}" style="width:210rpx; height:210rpx"></image>
+    <text class="product_name">{{product.name}}</text>
+    <text class="product_color_size">{{product.size_name}}/{{product.color_name}}</text>
+    <text class="product_price">{{product.price}}</text>
+    <view class="product_num_view">
+      <view class="product_num_reduce" bindtap="handleReduceNum" data-productid="{{product.id}}" data-index="{{index}}">-</view>
+      <view class="product_num">{{product.num}}</view>
+      <view class="product_num_add" bindtap="handleAddNum" data-productid="{{product.id}}" data-index="{{index}}">+</view>
+    </view>
+  </view>
+  <view class="bottom_view">
+    <mp-icon wx:if="{{is_all_selected}}" icon="done2" color="red" size="{{16}}"></mp-icon>
+    <mp-icon wx:else icon="done2" color="gray" size="{{16}}"></mp-icon>
+    <text>全选</text>
+    <view bindtap="handleDelectSelectedProduct">删除</view>
+    <view bindtap="handleToBuy">去结算</view>
+  </view>
+</block>
+<view wx:else>
+  <navigator url="/pages/index/index" class="go_home">去逛逛</navigator>
+</view>
