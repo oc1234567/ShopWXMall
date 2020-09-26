@@ -8,14 +8,256 @@ Page({
    */
   data: {
     categories: [],
-    cur_sub_categories: []
+    cur_sub_categories: [],
+    cur_sub_category_index: 0,
+    three_category_class_name: 'three-category',
+    selected_name_color: 'red',
+    normal_name_color: 'black',
+    no_class_name: "",
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.getCategoryData();
+    //--- 测试数据 --- 
+    // const categories = [{
+    //   'id': 1,
+    //   'name': '分类1',
+    //   'parent_id': null,
+    //   'pic': null,
+    //   'subCategories': [{
+    //     'id': 2,
+    //     'name': '子子分类1',
+    //     'parent_id': 4,
+    //     'pic': 'pic',
+    //     'subCategories': []
+    //   },
+    //   {
+    //     'id': 5,
+    //     'name': '子子分类2',
+    //     'parent_id': 4,
+    //     'pic': 'pic',
+    //     'subCategories': []
+    //   },
+    //   {
+    //     'id': 6,
+    //     'name': '子子分类3',
+    //     'parent_id': 4,
+    //     'pic': 'pic',
+    //     'subCategories': []
+    //   },
+    //   {
+    //     'id': 7,
+    //     'name': '子子分类4',
+    //     'parent_id': 4,
+    //     'pic': 'pic',
+    //     'subCategories': []
+    //   },
+    //   {
+    //     'id': 8,
+    //     'name': '子子分类5',
+    //     'parent_id': 4,
+    //     'pic': 'pic',
+    //     'subCategories': []
+    //   },
+    //   {
+    //     'id': 9,
+    //     'name': '子子分类6',
+    //     'parent_id': 4,
+    //     'pic': 'pic',
+    //     'subCategories': []
+    //   },
+    //   {
+    //     'id': 10,
+    //     'name': '子子分类7',
+    //     'parent_id': 4,
+    //     'pic': 'pic',
+    //     'subCategories': []
+    //   }]
+    // }, {
+    //   'id': 1,
+    //   'name': '分类1',
+    //   'parent_id': null,
+    //   'pic': null,
+    //   'subCategories': [{
+    //     'id': 2,
+    //     'name': '子子分类1',
+    //     'parent_id': 4,
+    //     'pic': 'pic',
+    //     'subCategories': []
+    //   },
+    //   {
+    //     'id': 5,
+    //     'name': '子子分类2',
+    //     'parent_id': 4,
+    //     'pic': 'pic',
+    //     'subCategories': []
+    //   },
+    //   {
+    //     'id': 6,
+    //     'name': '子子分类3',
+    //     'parent_id': 4,
+    //     'pic': 'pic',
+    //     'subCategories': []
+    //   },
+    //   {
+    //     'id': 7,
+    //     'name': '子子分类4',
+    //     'parent_id': 4,
+    //     'pic': 'pic',
+    //     'subCategories': []
+    //   },
+    //   {
+    //     'id': 8,
+    //     'name': '子子分类5',
+    //     'parent_id': 4,
+    //     'pic': 'pic',
+    //     'subCategories': []
+    //   },
+    //   {
+    //     'id': 9,
+    //     'name': '子子分类6',
+    //     'parent_id': 4,
+    //     'pic': 'pic',
+    //     'subCategories': []
+    //   },
+    //   {
+    //     'id': 10,
+    //     'name': '子子分类7',
+    //     'parent_id': 4,
+    //     'pic': 'pic',
+    //     'subCategories': []
+    //   }]
+    // }];
+    const categories = [{
+      'id': 1,
+      'name': '分类1',
+      'parent_id': null,
+      'pic': null,
+      'subCategories': [
+        {
+          'id': 4,
+          'name': '子分类1',
+          'parent_id': 1,
+          'pic': null,
+          'subCategories': [
+            {
+              'id': 2,
+              'name': '子子分类1',
+              'parent_id': 4,
+              'pic': 'pic',
+              'subCategories': []
+            },
+            {
+              'id': 5,
+              'name': '子子分类2',
+              'parent_id': 4,
+              'pic': 'pic',
+              'subCategories': []
+            },
+            {
+              'id': 6,
+              'name': '子子分类3',
+              'parent_id': 4,
+              'pic': 'pic',
+              'subCategories': []
+            },
+            {
+              'id': 7,
+              'name': '子子分类4',
+              'parent_id': 4,
+              'pic': 'pic',
+              'subCategories': []
+            },
+            {
+              'id': 8,
+              'name': '子子分类5',
+              'parent_id': 4,
+              'pic': 'pic',
+              'subCategories': []
+            },
+            {
+              'id': 9,
+              'name': '子子分类6',
+              'parent_id': 4,
+              'pic': 'pic',
+              'subCategories': []
+            },
+            {
+              'id': 10,
+              'name': '子子分类7',
+              'parent_id': 4,
+              'pic': 'pic',
+              'subCategories': []
+            }
+          ]
+        },
+        {
+          'id': 3,
+          'name': '子分类2',
+          'parent_id': null,
+          'pic': null,
+          'subCategories': [
+            {
+              'id': 11,
+              'name': '子子分类8',
+              'parent_id': 3,
+              'pic': 'pic',
+              'subCategories': []
+            },
+            {
+              'id': 12,
+              'name': '子子分类9',
+              'parent_id': 3,
+              'pic': 'pic',
+              'subCategories': []
+            },
+            {
+              'id': 13,
+              'name': '子子分类10',
+              'parent_id': 3,
+              'pic': 'pic',
+              'subCategories': []
+            },
+            {
+              'id': 14,
+              'name': '子子分类11',
+              'parent_id': 3,
+              'pic': 'pic',
+              'subCategories': []
+            },
+            {
+              'id': 15,
+              'name': '子子分类12',
+              'parent_id': 3,
+              'pic': 'pic',
+              'subCategories': []
+            },
+            {
+              'id': 16,
+              'name': '子子分类13',
+              'parent_id': 3,
+              'pic': 'pic',
+              'subCategories': []
+            },
+            {
+              'id': 17,
+              'name': '子子分类14',
+              'parent_id': 3,
+              'pic': 'pic',
+              'subCategories': []
+            }
+          ]
+        }
+      ]
+    }];
+    this.setData({
+      categories: categories,
+      cur_sub_categories: categories[0].subCategories,
+      cur_sub_category_index: 0,
+    })
+    // this.getCategoryData();
     
   },
 
@@ -85,7 +327,8 @@ Page({
         })
         this.setData({
           categories: categories,
-          cur_sub_categories: categories[0].subCategories
+          cur_sub_categories: categories[0].subCategories,
+          cur_sub_category_index: 0,
         })
       }
     } catch (error) {
@@ -99,7 +342,8 @@ Page({
   handleChangeCategoryIndex(e) {
     const index = e.currentTarget.dataset.index;
     this.setData({
-      cur_sub_categories: this.data.categories[index].sub_categories
+      cur_sub_categories: this.data.categories[index].subCategories,
+      cur_sub_category_index: index
     })
   },
 

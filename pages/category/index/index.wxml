@@ -1,14 +1,32 @@
 <!--pages/category/index.wxml-->
 <view class="wrapper">
   <view class="one-category">
-    <view wx:for="{{categories}}" wx:for-item="category" wx:key="id" class="category-item" bindtap="handleChangeCategoryIndex" data-index="{{index}}">{{category.name}}</view>
+    <view wx:for="{{categories}}" wx:for-item="category" wx:key="id" class="one-category-item" bindtap="handleChangeCategoryIndex" data-index="{{index}}">
+    <text style="color: {{index === cur_sub_category_index ? selected_name_color : normal_name_color}}">{{category.name}}</text>
+    </view>
   </view>
   <view class="content">
-    <view wx:for="{{cur_sub_categories}}" wx:for-item="sub_category" wx:key="id" class="sub-category-item" bindtap="handleToProductsList" data-id="{{sub_category.id}}">
-      <block wx:if="{{sub_category.pic}}">
-        <image src="{{sub_category.pic}}" class="sub-category-item-image"></image>
+  <view class="{{cur_sub_categories[0].subCategories.length == 0 ? three_category_class_name : no_class_name}}">
+    <block wx:for="{{cur_sub_categories}}" wx:for-item="sub_category" wx:key="id">
+    <block wx:if="{{sub_category.subCategories.length > 0}}">
+          <view class='two-category-item-name'>{{sub_category.name}}</view>
+          <view class="three-category">
+            <view wx:for="{{sub_category.subCategories}}" wx:for-item="sun_category" wx:key="id" class="three-category-item" bindtap="handleToProductsList" data-id="{{sun-category.id}}">
+              <block wx:if="{{sun_category.pic}}">
+                <image src="{{sun_category.pic}}" class="three-category-item-image">
+                </image>
+              </block>
+              {{sun_category.name}}
+            </view>
+          </view>
+        </block>
+        <view wx:else bindtap="handleToProductsList" data-id="{{sub_category.id}}" class="three-category-item">
+          <block wx:if="{{sub_category.pic}}">
+            <image src="{{sub_category.pic}}" class="three-category-item-image"></image>
+          </block> 
+          {{sub_category.name}}  
+        </view>  
       </block>
-      {{sub_category.name}}
     </view>
   </view>
 </view>
