@@ -20,45 +20,24 @@ Page({
   onLoad: function (options) {
     //--- 获取 分类id ---
     const category_id = options.id;
+    const category_ids = options.ids;
     //--- 获取 分类id 下的产品 ---
-    const that = this;
-    util.request(`${api.CategoryGoods}?id=${category_id}`, {"expand": "categoryProducts"}).then(res => {
-      if (!res || !res.data) {
-        return;
-      }
-      const category = res.data;
-      const category_id = category.id;
-      const category_name = category.name;
-      const category_products = category.categoryProducts;
-
-      if (category_products && Array.isArray(category_products)) {
-        let count = category_products.length;
-        category_products.forEach(category_product => {
-          const product_id = category_product.product_id;
-          util.request(`${api.GoodDetail}?id=${product_id}`, {"expand": "picUrl"}).then(res => {
-            if (!res || !res.data) {
-              return; 
-            }
-            const product = {
-              "id": res.data.id,
-              "name": res.data.name,
-              "image": res.data.picUrl,
-              "price": res.data.price,
-            }
-            that.data.category_products.push(product);
-            count --;
-            if (count == 0) {
-              that.setData({
-                is_ready: true,
-                category_id: category_id,
-                category_name: category_name,
-                category_products: that.data.category_products
-              })
-            }
+    if (category_id) {
+      this.getCategoryProducts(category_id);
+    } 
+    if (category_ids) {
+      try {
+        const category_ids_arr = JSON.parse(category_ids);
+        if (category_ids_arr && Array.isArray(category_ids_arr)) {
+          category_ids_arr.forEach(id => {
+            this.getCategoryProducts(id);
           })
-        })
+        }
+      } catch (error) {
+        
       }
-    })
+    }
+    
   },
 
   /**
@@ -108,5 +87,49 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+
+  /**
+   * 获取单个分类的数据
+   */
+  getCategoryProducts(category_id) {
+    const that = this;
+    util.request(`${api.CategoryGoods}?id=${category_id}`, {"expand": "categoryProducts"}).then(res => {
+      if (!res || !res.data) {
+        return;
+      }
+      const category = res.data;
+      const category_id = category.id;
+      const category_name = category.name;
+      const category_products = category.categoryProducts;
+
+      if (category_products && Array.isArray(category_products)) {
+        let count = category_products.length;
+        category_products.forEach(category_product => {
+          const product_id = category_product.product_id;
+          util.request(`${api.GoodDetail}?id=${product_id}`, {"expand": "picUrl"}).then(res => {
+            if (!res || !res.data) {
+              return; 
+            }
+            const product = {
+              "id": res.data.id,
+              "name": res.data.name,
+              "image": res.data.picUrl,
+              "price": res.data.price,
+            }
+            that.data.category_products.push(product);
+            count --;
+            if (count == 0) {
+              that.setData({
+                is_ready: true,
+                category_id: category_id,
+                category_name: category_name,
+                category_products: that.data.category_products
+              })
+            }
+          })
+        })
+      }
+    })
   }
 })

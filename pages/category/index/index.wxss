@@ -27,7 +27,6 @@
 .three-category {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
   padding: 20rpx;
 }
 .three-category-item {
@@ -36,9 +35,7 @@
   width: 150rpx;
   height: 200rpx;
   text-align: center;
-  background-color: seagreen;
-  margin-top: 20rpx;
-  margin-bottom: 20rpx;
+  margin: 20rpx 40rpx 20rpx 0;
 }
 
 .three-category-item-image {
@@ -49,5 +46,4 @@
 .content {
   /* flex: 1; */
   width: 630rpx;
-  background-color: salmon;
 }

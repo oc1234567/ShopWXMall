@@ -78,7 +78,9 @@ Page({
                   'num': product_cnt,
                   'name': '',
                   'size_name': '',
-                  'color_name': ''
+                  'color_name': '',
+                  'size_id': product_size,
+                  'color_id': product_type
                 })
                 order && (order.products_num = order.products_num + product_cnt);
                 that.setData({
@@ -92,7 +94,7 @@ Page({
                   //--- product 添加 name、price、ori_price、piUrl ----
                   let order = that.data.order_list.find(order => order.id === order_id);
                   if (order) {
-                    let product = order.products.find(product => product.id === product_id);
+                    let product = order.products.find(product => product.id === product_id && product.size_id === product_size && product.color_id === product_type);
                     product && (product = Object.assign(product, {
                       'name': res.data.name || '',
                       'price': res.data.price || 0.00,
@@ -113,7 +115,7 @@ Page({
                     //--- product 添加 size ----
                     let order = that.data.order_list.find(order => order.id === order_id);
                     if (order) {
-                      let product = order.products.find(product => product.id === product_id);
+                      let product = order.products.find(product => product.id === product_id && product.size_id === product_size && product.color_id === product_type);
                       product && (product = Object.assign(product, {
                         'size_name': res.data.name || '',
                       }))
@@ -132,7 +134,7 @@ Page({
                     //--- product 添加 color ----
                     let order = that.data.order_list.find(order => order.id === order_id);
                     if (order) {
-                      let product = order.products.find(product => product.id === product_id);
+                      let product = order.products.find(product => product.id === product_id && product.size_id === product_size && product.color_id === product_type);
                       product && (product = Object.assign(product, {
                         'color_name': res.data.name || '',
                       }))

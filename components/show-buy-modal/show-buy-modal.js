@@ -123,11 +123,11 @@ Component({
         if (!data) {
           data = [];
         }
-        //如果存在同ID的产品，则合并产品数量
+        //如果存在同ID同尺寸同颜色的产品，则合并产品数量
         if (Array.isArray(data) && data.length > 0) {
-          let product = data.find(item => item.id === this.properties.good_info.id);
-          if (product && product.color_id === this.data.selected_color_id && product.size_id === this.data.selected_size_id) {
-            product.num = 2;
+          let product = data.find(item => item.id === this.properties.good_info.id && item.color_id === this.data.selected_color_id && item.size_id === this.data.selected_size_id);
+          if (product) {
+            product.num++;
             wx.setStorageSync(constant.StorageKey_Cart_Data, JSON.stringify(data));
             this.dismissModal();
             console.log('加入购物车成功!');

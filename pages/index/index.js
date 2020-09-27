@@ -178,40 +178,10 @@ Page({
   },
 
   /**
-   * 提交数据到购物车
-   */
-  handleAddCartProducts() {
-    //获取购物车商品
-    let products;
-    try {
-      products = JSON.parse(wx.getStorageSync(constants.StorageKey_Cart_Data));
-      if (!products) {
-        products = [];
-      }
-    } catch (error) {
-      products = [];
-    }
-    if (Array.isArray(products)) {
-      products.forEach(product => {
-        const cart_product = {
-          'customer_id': 1,
-          'product_id': product.id,
-          'product_num': product.num,
-          'price': product.price         
-        }
-        util.request(`${api.CreateCartProduct}`, cart_product, 'POST').then(res => {
-          console.log('加入购物车成功！');
-          
-        })
-      })
-    }
-    
-  },
-  /**
    * 获取分类表，缓存分类表
    */
   handleGetCategoryInfo() {
-    util.request(`${api.CategoryInfo}`, {"expand": "subCategories"}).then(res => {
+    util.request(`${api.CategoryInfo}`).then(res => {
       console.log('获取分类表成功！');
       if (!res || !res.data) {
         return;
@@ -233,18 +203,8 @@ Page({
   },
 
   /**
-   * 导航至购物车列表
+   * 导航至订单列表
    */
-  handleToCartList(e) {
-    wx.navigateTo({
-      url: '/pages/cart/index',
-    })
-  },
-
-  handleClearCartList() {
-    wx.removeStorageSync(constants.StorageKey_Cart_Data);
-  },
-
   handleToOrderList() {
     wx.navigateTo({
       url: '/pages/myCenter/orderList/index',

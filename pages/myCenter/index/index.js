@@ -75,6 +75,10 @@ Page({
    */
   handleToOrderList(e) {
     const index = e.currentTarget.dataset.index;
+    if (index == 5) {
+      //跳转至售后/退款页面
+      return;
+    }
     wx.navigateTo({
       url: `/pages/myCenter/orderList/index?index=${index}`,
     })

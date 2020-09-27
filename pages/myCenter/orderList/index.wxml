@@ -32,9 +32,5 @@
       </view>
     </view>
   </block>
-  <empty-view wx:else ></empty-view>
-  <view class="empty">
-    <image src="/static/images/my_course_empty.png" class="empty-img"></image>
-    <text class="empty-text">暂无订单</text>
-  </view>
+  <empty-view wx:else empty_title="暂无订单"></empty-view>
 </block>

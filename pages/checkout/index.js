@@ -1,5 +1,6 @@
 // pages/checkout/index.js
 const util = require('../../utils/util');
+const cartUtil = require('../../utils/cartUtil');
 const constant = require('../../config/constant/index');
 const api = require('../../config/api');
 
@@ -201,6 +202,8 @@ Page({
             wx.navigateTo({
               url: '/pages/myCenter/orderList/index',
             })
+            cartUtil.clearCartList();
+            cartUtil.addCartProducts();
           }
         })
       }) 

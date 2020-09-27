@@ -6,12 +6,12 @@
     </view>
   </view>
   <view class="content">
-  <view class="{{cur_sub_categories[0].subCategories.length == 0 ? three_category_class_name : no_class_name}}">
-    <block wx:for="{{cur_sub_categories}}" wx:for-item="sub_category" wx:key="id">
-    <block wx:if="{{sub_category.subCategories.length > 0}}">
-          <view class='two-category-item-name'>{{sub_category.name}}</view>
+    <view class="{{(cur_sub_categories[0].subCategories && cur_sub_categories[0].subCategories.length > 0) ? no_class_name : three_category_class_name}}">
+      <block wx:for="{{cur_sub_categories}}" wx:for-item="sub_category" wx:key="id">
+        <block wx:if="{{sub_category.subCategories && sub_category.subCategories.length > 0}}">
+          <view class="two-category-item-name" bindtap="handleToProductsList" data-id="{{sub_category.id}}">{{sub_category.name}}</view>
           <view class="three-category">
-            <view wx:for="{{sub_category.subCategories}}" wx:for-item="sun_category" wx:key="id" class="three-category-item" bindtap="handleToProductsList" data-id="{{sun-category.id}}">
+            <view wx:for="{{sub_category.subCategories}}" wx:for-item="sun_category" wx:key="id" class="three-category-item" bindtap="handleToProductsList" data-id="{{sun_category.id}}">
               <block wx:if="{{sun_category.pic}}">
                 <image src="{{sun_category.pic}}" class="three-category-item-image">
                 </image>

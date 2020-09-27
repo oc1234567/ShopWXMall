@@ -29,7 +29,6 @@
   <button bindtap="handleGetCategoryInfo">获取分类表</button>
   <button bindtap="handleAddCartProducts">加入购物车</button>
   <button bindtap="handleToAddressList">地址列表</button>
-  <button bindtap="handleToCartList">CartList</button>
   <button bindtap="handleClearCartList">Clear CartList</button>
   <button bindtap="handleToOrderList">My OrderList</button>
   </view>

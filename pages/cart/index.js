@@ -18,9 +18,13 @@ Page({
    */
   onLoad: function (options) {
     //获取购物车商品
-    let products = wx.getStorageSync(constant.StorageKey_Cart_Data);
-    products = JSON.parse(products);
-    if (!products) {
+    let products;
+    try {
+      products = JSON.parse(wx.getStorageSync(constant.StorageKey_Cart_Data));
+      if (!products) {
+        products = [];
+      }
+    } catch (error) {
       products = [];
     }
     this.setData({
@@ -47,27 +51,35 @@ Page({
    */
   onShow: function () {
     //获取购物车商品
-    let products = wx.getStorageSync(constant.StorageKey_Cart_Data);
-    products = JSON.parse(products);
-    if (!products) {
+    let products;
+    try {
+      products = JSON.parse(wx.getStorageSync(constant.StorageKey_Cart_Data));
+      if (!products) {
+        products = [];
+      }
+    } catch (error) {
       products = [];
     }
     //判断是否有新加入商品
-    if (this.data.cart_goods.length < products.length) {
-      let copyCartGoods = Array.from(this.data.cart_goods);
-      let copySelectedStates = Array.from(this.data.selected_state);
+    if (this.data.cart_goods.length <= products.length) {
       products.forEach((product) => {
-        const index = this.data.cart_goods.findIndex(oldProduct => oldProduct.id === product.id);
+        const index = this.data.cart_goods.findIndex(oldProduct => oldProduct.id === product.id && oldProduct.size_id === product.size_id && oldProduct.color_id === product.color_id && oldProduct.num === product.num);
         if (index === -1) {
-          copyCartGoods.push(product);
-          copySelectedStates.push(true);
+          //同种商品存在，数量发生变化
+          const oldProduct = this.data.cart_goods.find(oldProduct => oldProduct.id === product.id && oldProduct.size_id === product.size_id && oldProduct.color_id === product.color_id);
+          if (oldProduct) {
+            oldProduct.num = product.num;
+          } else {
+            this.data.cart_goods.push(product);
+            this.data.selected_state.push(true);
+          }
         }
       })
       this.setData({
-        cart_goods: copyCartGoods,
-        selected_state: copySelectedStates,
-        is_all_selected: this.updateIsAllSelected(copySelectedStates),
-        all_payment_money: this.updatePaymentInfo(copySelectedStates)
+        cart_goods: this.data.cart_goods,
+        selected_state: this.data.selected_state,
+        is_all_selected: this.updateIsAllSelected(this.data.selected_state),
+        all_payment_money: this.updatePaymentInfo(this.data.selected_state)
       })
     }
   },
