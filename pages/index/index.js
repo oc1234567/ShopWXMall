@@ -178,22 +178,6 @@ Page({
   },
 
   /**
-   * 获取分类表，缓存分类表
-   */
-  handleGetCategoryInfo() {
-    util.request(`${api.CategoryInfo}`).then(res => {
-      console.log('获取分类表成功！');
-      if (!res || !res.data) {
-        return;
-      }
-      if (Array.isArray(res.data)) {
-        console.log('缓存分类表成功！');
-        wx.setStorageSync(constants.StorageKey_Category_Info, JSON.stringify(res.data));
-      }
-    })
-  },
-
-  /**
    * 导航至地址列表
    */
   handleToAddressList(e) {

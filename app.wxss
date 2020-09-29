@@ -60,6 +60,22 @@ button::after {
   border-bottom-width: 1px;
 }
 
+.padding-left {
+  padding-left: 25rpx;
+}
+
+.padding-right {
+  padding-right: 25rpx;
+}
+
+.padding-top {
+  padding-top: 25rpx;
+}
+
+.padding-bottom {
+  padding-bottom: 25rpx;
+}
+
 /** 主题颜色 **/
 .gray-text {
   --bg-color: #656565;

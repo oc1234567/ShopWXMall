@@ -1,5 +1,6 @@
 // pages/cart/index.js
 const constant = require('../../config/constant/index');
+const cartUtil = require('../../utils/cartUtil');
 
 Page({
 
@@ -10,33 +11,16 @@ Page({
     cart_goods: [],
     selected_state: [],
     is_all_selected: false,
-    all_payment_money: 0.00
+    all_payment_money: 0.00,
+    product_num_reduce_disable_class_name: 'product_num_reduce_disable',
+    product_num_reduce_enable_class_name: 'product_num_reduce_enable'
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    //获取购物车商品
-    let products;
-    try {
-      products = JSON.parse(wx.getStorageSync(constant.StorageKey_Cart_Data));
-      if (!products) {
-        products = [];
-      }
-    } catch (error) {
-      products = [];
-    }
-    this.setData({
-      cart_goods:products
-    })
-    //默认商品全部选中
-    const selectStates = products.map(product => true);
-    this.setData({
-      selected_state: selectStates,
-      is_all_selected: true,
-      all_payment_money: this.updatePaymentInfo(selectStates)
-    })
+    this.getCartProductsData();
   },
 
   /**
@@ -50,6 +34,37 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    this.getCartProductsData();
+  },
+
+  /**
+   * 判断缓存是否存在购物车数据
+   */
+  getCartProductsData() {
+    let products;
+    try {
+      products = JSON.parse(wx.getStorageSync(constant.StorageKey_Cart_Data));
+      if (!products) {
+        products = [];
+      }
+    } catch (error) {
+      products = [];
+    }
+    if (products && Array.isArray(products) && products.length > 0) {
+      //缓存已存在
+      this.getCacheCartProducts();
+    } else {
+      //缓存不存在
+      this.getCartProductsInfo(() => {
+        this.getCacheCartProducts();
+      })
+    }
+  },
+
+  /**
+   * 缓存获取购物车数据
+   */
+  getCacheCartProducts() {
     //获取购物车商品
     let products;
     try {
@@ -83,6 +98,22 @@ Page({
       })
     }
   },
+
+   /**
+    * 接口拉取购物车数据，缓存购物车数据
+    */
+   getCartProductsInfo(successCallback) {
+    cartUtil.getCartProducts().then(data => {
+      if (!data) {
+        return;
+      }
+      if (Array.isArray(data)) {
+        //更新购物车数据缓存
+        wx.setStorageSync(constant.StorageKey_Cart_Data, JSON.stringify(data));
+        successCallback();
+      }
+    })
+   },
 
   /**
    * 生命周期函数--监听页面隐藏
@@ -208,14 +239,36 @@ Page({
   },
 
   /**
+   * 　切换是否全选
+   */
+  handleToggleAllSelected() {
+    if (this.data.is_all_selected) {
+      this.data.selected_state.forEach((selected, index) => {
+        this.data.selected_state[index] = false;
+      })
+    } else {
+      this.data.selected_state.forEach((selected, index) => {
+        this.data.selected_state[index] = true;
+      })
+    }
+    this.setData({
+      selected_state: this.data.selected_state,
+      is_all_selected: this.updateIsAllSelected(this.data.selected_state),
+      all_payment_money: this.updatePaymentInfo(this.data.selected_state)
+    })
+  },
+
+  /**
    * 减少商品数量
    */
   handleReduceNum(e) {
     const index = e.currentTarget.dataset.index;
     const product = this.data.cart_goods[index];
     const { num } = product;
-    if (num > 1){
-      product.num = num - 1;
+    if (num === 1) {
+      return;
+    }
+    product.num = num - 1;
       const is_selected = this.data.selected_state[index];
       if (!is_selected) {
         this.data.selected_state[index] = true;
@@ -226,7 +279,6 @@ Page({
         is_all_selected: this.updateIsAllSelected(this.data.selected_state),
         all_payment_money: this.updatePaymentInfo(this.data.selected_state)
       })
-    }
   },
 
    /**

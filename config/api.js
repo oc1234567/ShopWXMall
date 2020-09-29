@@ -21,6 +21,7 @@ module.exports = {
     CustomerAddressInfo: API_BASE_URL + 'customer-addr/view', //查询地址
 
     CreateCartProduct: API_BASE_URL + 'cart-product/create', //加入购物车
+    DeleteCartProduct: API_BASE_URL + 'cart-product/delete', //删除购物车
     CartProductInfo: API_BASE_URL + 'cart-product', //查询购物车
 
     CreateOrder: API_BASE_URL + 'order/create', //添加订单

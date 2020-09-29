@@ -7,14 +7,16 @@
   <text class="address-position address-text">{{addr_selected.province}}{{addr_selected.city}}{{addr_selected.district}}{{addr_selected.address}}  ({{addr_selected.zip}})</text>
   <mp-icon icon="arrow" color="#a8a8a8" size="{{11}}" class="address-arrow-icon"></mp-icon>
 </view>
-<button wx:else bindtap="handleToAddAddress">add New Address</button>
+<view wx:else bindtap="handleToAddAddress" class="add-address-wrapper">
+  <mp-icon icon="location" color="#f00" size="{{21}}" class="add-address-icon"></mp-icon>请先添加收货地址<mp-icon icon="arrow" color="#f00" size="{{11}}" class="add-address-arrow"></mp-icon>
+</view>
 </view>
 <view style="height: 20rpx"></view>
-<view style="display: flex;align-items: center; padding: 20rpx; padding-left: 30rpx; background-color: white">
+<view class="shop-list-title-wrapper padding-left">
     <mp-icon icon="shop" color="#484848" size="{{18}}"></mp-icon>
     <text class="shop-list-text" space="nbsp">  购物清单</text>
   </view>
-<view wx:for="{{products}}" wx:for-item="product" class="shop-product-wrapper hairline hairline-top" wx:key="id">
+<view wx:for="{{products}}" wx:for-item="product" class="shop-product-wrapper hairline hairline-top padding-left" wx:key="id">
   <image class="shop-product-image" src="{{product.img}}" style="width:210rpx; height:210rpx"></image>
   <text class="shop-product-name product-name text">{{product.name}}</text>
   <text class="shop-product-size-color gray-text">{{product.size_name}}/{{product.color_name}}</text>

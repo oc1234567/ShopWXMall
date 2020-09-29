@@ -51,14 +51,6 @@
   line-height: 100rpx;
 }
 
-.padding-left {
-  padding-left: 25rpx;
-}
-
-.padding-right {
-  padding-right: 25rpx;
-}
-
 .big-text {
   font-size: 32rpx;
 }

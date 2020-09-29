@@ -65,16 +65,14 @@ Page({
       }
       //地址存在，展示地址
       if (Array.isArray(res.customerAddrs)) {
-        if (res.customerAddrs.length > 0) {
-          that.setData({
-            addresses: res.customerAddrs
-          })
-          //将用户地址缓存
-          wx.setStorage({
-            data: JSON.stringify(res.customerAddrs),
-            key: `${constant.StorageKey_Customer_Addrs}_uid_${res.id}`,
-          })
-        }
+        that.setData({
+          addresses: res.customerAddrs
+        })
+        //将用户地址缓存
+        wx.setStorage({
+          data: JSON.stringify(res.customerAddrs),
+          key: `${constant.StorageKey_Customer_Addrs}_uid_${res.id}`,
+        })
       }
     });
   },

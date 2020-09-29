@@ -68,13 +68,13 @@ Page({
           if (!defaultAddr) {
             defaultAddr = res.customerAddrs[0];
           }
-          //将用户地址缓存
-          wx.setStorage({
-            data: JSON.stringify(res.customerAddrs),
-            key: `${constant.StorageKey_Customer_Addrs}_uid_${res.id}`,
-          })
         }
       }
+      //将用户地址缓存
+      wx.setStorage({
+        data: JSON.stringify(res.customerAddrs),
+        key: `${constant.StorageKey_Customer_Addrs}_uid_${res.id}`,
+      })
       
       that.setData({
         user_id: res.id,
@@ -171,6 +171,11 @@ Page({
   handleSubmitOrder(e) {
     //--- 判断地址未取值成功，需要等待地址取值成功 ---
     if (!this.data.is_ready) {
+      console.log('请等待地址取值成功！');
+      return;
+    }
+    if (!this.data.addr_selected.id) {
+      console.log('请完善地址信息！');
       return;
     }
     console.log('提交订单');
@@ -202,7 +207,8 @@ Page({
             wx.navigateTo({
               url: '/pages/myCenter/orderList/index',
             })
-            cartUtil.clearCartList();
+            //需将已购商品移除购物车
+            cartUtil.removeCartList();
             cartUtil.addCartProducts();
           }
         })

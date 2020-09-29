@@ -1,26 +1,34 @@
 <!--pages/cart/index.wxml-->
 <block wx:if="{{cart_goods.length > 0}}">
-  <view wx:for="{{cart_goods}}" wx:for-item="product" wx:key="id" class="product_wrapper">
-    <view class="product_select_icon" bindtap="handleSelectProduct" data-index="{{index}}">
-      <mp-icon wx:if="{{selected_state[index]}}" icon="done2" color="red" size="{{16}}"></mp-icon>
-      <mp-icon wx:else icon="done2" color="gray" size="{{16}}"></mp-icon>
-    </view>
-    <image class="product_image" src="{{product.img}}" style="width:210rpx; height:210rpx"></image>
-    <text class="product_name">{{product.name}}</text>
-    <text class="product_color_size">{{product.size_name}}/{{product.color_name}}</text>
-    <text class="product_price">{{product.price}}</text>
-    <view class="product_num_view">
-      <view class="product_num_reduce" bindtap="handleReduceNum" data-productid="{{product.id}}" data-index="{{index}}">-</view>
-      <view class="product_num">{{product.num}}</view>
-      <view class="product_num_add" bindtap="handleAddNum" data-productid="{{product.id}}" data-index="{{index}}">+</view>
+  <view class="padding-left padding-right">
+    <view wx:for="{{cart_goods}}" wx:for-item="product" wx:key="id" class="product_wrapper padding-top padding-bottom hairline hairline-bottom">
+      <view class="product_select_icon" bindtap="handleSelectProduct" data-index="{{index}}">
+        <mp-icon wx:if="{{selected_state[index]}}" icon="done2" color="red" size="{{16}}"></mp-icon>
+        <mp-icon wx:else icon="done2" color="gray" size="{{16}}"></mp-icon>
+      </view>
+      <image class="product_image" src="{{product.img}}" style="width:210rpx; height:210rpx"></image>
+      <text class="product_name">{{product.name}}</text>
+      <text class="product_color_size">{{product.size_name}}/{{product.color_name}}</text>
+      <text class="product_price">{{product.price}}</text>
+      <view class="product_num_view">
+        <view class="product-num-view-content">
+          <view class="product-num-item product_num_reduce {{product.num === 1 ? product_num_reduce_disable_class_name : product_num_reduce_enable_class_name}}" bindtap="handleReduceNum" data-productid="{{product.id}}" data-index="{{index}}">-</view>
+          <view class="product-num-item">{{product.num}}</view>
+          <view class="product-num-item product_num_add" bindtap="handleAddNum" data-productid="{{product.id}}" data-index="{{index}}">+</view>
+        </view>
+      </view>
     </view>
   </view>
-  <view class="bottom_view">
-    <mp-icon wx:if="{{is_all_selected}}" icon="done2" color="red" size="{{16}}"></mp-icon>
-    <mp-icon wx:else icon="done2" color="gray" size="{{16}}"></mp-icon>
-    <text>全选</text>
-    <view bindtap="handleDelectSelectedProduct">删除</view>
-    <view bindtap="handleToBuy">去结算</view>
+  <view class="bottom_view hairline hairline-top">
+    <view class="bottom-view-content">
+      <view bindtap="handleToggleAllSelected" class="bottom-view-item-center toggle-all-selected">
+        <mp-icon wx:if="{{is_all_selected}}" icon="done2" color="red" size="{{16}}"></mp-icon>
+        <mp-icon wx:else icon="done2" color="gray" size="{{16}}"></mp-icon>
+        全选
+      </view>
+      <view bindtap="handleDelectSelectedProduct" class="bottom-view-item-center delete">删除</view>
+      <view bindtap="handleToBuy" class="bottom-view-item-center to-buy">去结算</view>
+    </view>
   </view>
 </block>
 <view wx:else>

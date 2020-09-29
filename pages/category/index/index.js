@@ -1,5 +1,7 @@
 // pages/category/index.js
 const constants = require('../../../config/constant/index');
+const util = require('../../../utils/util.js');
+const api = require('../../../config/api.js');
 
 Page({
 
@@ -20,229 +22,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    //--- 测试数据 --- 
-    // const categories = [{
-    //   'id': 1,
-    //   'name': '分类1',
-    //   'parent_id': null,
-    //   'pic': null,
-    //   'subCategories': [{
-    //     'id': 2,
-    //     'name': '子子分类1',
-    //     'parent_id': 4,
-    //     'pic': 'https://dimg05.c-ctrip.com/images/100b11000000qcd4zEAD7_C_250_250.jpg',
-    //   },
-    //   {
-    //     'id': 5,
-    //     'name': '子子分类2',
-    //     'parent_id': 4,
-    //     'pic': 'https://dimg05.c-ctrip.com/images/100b11000000qcd4zEAD7_C_250_250.jpg',
-    //   },
-    //   {
-    //     'id': 6,
-    //     'name': '子子分类3',
-    //     'parent_id': 4,
-    //     'pic': 'https://dimg05.c-ctrip.com/images/100b11000000qcd4zEAD7_C_250_250.jpg',
-    //   },
-    //   {
-    //     'id': 7,
-    //     'name': '子子分类4',
-    //     'parent_id': 4,
-    //     'pic': 'https://dimg05.c-ctrip.com/images/100b11000000qcd4zEAD7_C_250_250.jpg',
-    //   },
-    //   {
-    //     'id': 8,
-    //     'name': '子子分类5',
-    //     'parent_id': 4,
-    //     'pic': 'https://dimg05.c-ctrip.com/images/100b11000000qcd4zEAD7_C_250_250.jpg',
-    //   },
-    //   {
-    //     'id': 9,
-    //     'name': '子子分类6',
-    //     'parent_id': 4,
-    //     'pic': 'https://dimg05.c-ctrip.com/images/100b11000000qcd4zEAD7_C_250_250.jpg',
-    //   },
-    //   {
-    //     'id': 10,
-    //     'name': '子子分类7',
-    //     'parent_id': 4,
-    //     'pic': 'https://dimg05.c-ctrip.com/images/100b11000000qcd4zEAD7_C_250_250.jpg',
-    //   }]
-    // }, {
-    //   'id': 1,
-    //   'name': '分类1',
-    //   'parent_id': null,
-    //   'pic': null,
-    //   'subCategories': [{
-    //     'id': 2,
-    //     'name': '子子分类1',
-    //     'parent_id': 4,
-    //     'pic': 'https://dimg05.c-ctrip.com/images/100b11000000qcd4zEAD7_C_250_250.jpg',
-    //   },
-    //   {
-    //     'id': 5,
-    //     'name': '子子分类2',
-    //     'parent_id': 4,
-    //     'pic': 'https://dimg05.c-ctrip.com/images/100b11000000qcd4zEAD7_C_250_250.jpg',
-    //   },
-    //   {
-    //     'id': 6,
-    //     'name': '子子分类3',
-    //     'parent_id': 4,
-    //     'pic': 'https://dimg05.c-ctrip.com/images/100b11000000qcd4zEAD7_C_250_250.jpg',
-    //   },
-    //   {
-    //     'id': 7,
-    //     'name': '子子分类4',
-    //     'parent_id': 4,
-    //     'pic': 'https://dimg05.c-ctrip.com/images/100b11000000qcd4zEAD7_C_250_250.jpg',
-    //   },
-    //   {
-    //     'id': 8,
-    //     'name': '子子分类5',
-    //     'parent_id': 4,
-    //     'pic': 'https://dimg05.c-ctrip.com/images/100b11000000qcd4zEAD7_C_250_250.jpg',
-    //   },
-    //   {
-    //     'id': 9,
-    //     'name': '子子分类6',
-    //     'parent_id': 4,
-    //     'pic': 'https://dimg05.c-ctrip.com/images/100b11000000qcd4zEAD7_C_250_250.jpg',
-    //   },
-    //   {
-    //     'id': 10,
-    //     'name': '子子分类7',
-    //     'parent_id': 4,
-    //     'pic': 'https://dimg05.c-ctrip.com/images/100b11000000qcd4zEAD7_C_250_250.jpg',
-    //   }]
-    // }];
-    // const categories = [{
-    //   'id': 1,
-    //   'name': '分类1',
-    //   'parent_id': null,
-    //   'pic': null,
-    //   'subCategories': [
-    //     {
-    //       'id': 4,
-    //       'name': '子分类1',
-    //       'parent_id': 1,
-    //       'pic': null,
-    //       'subCategories': [
-    //         {
-    //           'id': 2,
-    //           'name': '子子分类1',
-    //           'parent_id': 4,
-    //           'pic': 'pic',
-    //           'subCategories': []
-    //         },
-    //         {
-    //           'id': 5,
-    //           'name': '子子分类2',
-    //           'parent_id': 4,
-    //           'pic': 'pic',
-    //           'subCategories': []
-    //         },
-    //         {
-    //           'id': 6,
-    //           'name': '子子分类3',
-    //           'parent_id': 4,
-    //           'pic': 'pic',
-    //           'subCategories': []
-    //         },
-    //         {
-    //           'id': 7,
-    //           'name': '子子分类4',
-    //           'parent_id': 4,
-    //           'pic': 'pic',
-    //           'subCategories': []
-    //         },
-    //         {
-    //           'id': 8,
-    //           'name': '子子分类5',
-    //           'parent_id': 4,
-    //           'pic': 'pic',
-    //           'subCategories': []
-    //         },
-    //         {
-    //           'id': 9,
-    //           'name': '子子分类6',
-    //           'parent_id': 4,
-    //           'pic': 'pic',
-    //           'subCategories': []
-    //         },
-    //         {
-    //           'id': 10,
-    //           'name': '子子分类7',
-    //           'parent_id': 4,
-    //           'pic': 'pic',
-    //           'subCategories': []
-    //         }
-    //       ]
-    //     },
-    //     {
-    //       'id': 3,
-    //       'name': '子分类2',
-    //       'parent_id': null,
-    //       'pic': null,
-    //       'subCategories': [
-    //         {
-    //           'id': 11,
-    //           'name': '子子分类8',
-    //           'parent_id': 3,
-    //           'pic': 'pic',
-    //           'subCategories': []
-    //         },
-    //         {
-    //           'id': 12,
-    //           'name': '子子分类9',
-    //           'parent_id': 3,
-    //           'pic': 'pic',
-    //           'subCategories': []
-    //         },
-    //         {
-    //           'id': 13,
-    //           'name': '子子分类10',
-    //           'parent_id': 3,
-    //           'pic': 'pic',
-    //           'subCategories': []
-    //         },
-    //         {
-    //           'id': 14,
-    //           'name': '子子分类11',
-    //           'parent_id': 3,
-    //           'pic': 'pic',
-    //           'subCategories': []
-    //         },
-    //         {
-    //           'id': 15,
-    //           'name': '子子分类12',
-    //           'parent_id': 3,
-    //           'pic': 'pic',
-    //           'subCategories': []
-    //         },
-    //         {
-    //           'id': 16,
-    //           'name': '子子分类13',
-    //           'parent_id': 3,
-    //           'pic': 'pic',
-    //           'subCategories': []
-    //         },
-    //         {
-    //           'id': 17,
-    //           'name': '子子分类14',
-    //           'parent_id': 3,
-    //           'pic': 'pic',
-    //           'subCategories': []
-    //         }
-    //       ]
-    //     }
-    //   ]
-    // }];
-    // this.setData({
-    //   categories: categories,
-    //   cur_sub_categories: categories[0].subCategories,
-    //   cur_sub_category_index: 0,
-    // })
     this.getCategoryData();
     
   },
@@ -297,10 +76,30 @@ Page({
   },
 
   /**
-   * 获取分类数据
+   * 判断缓存是否存在分类数据
    */
   getCategoryData() {
-    //缓存--获取分类数据
+    let categoryInfo = wx.getStorageSync(constants.StorageKey_Category_Info);
+    try {
+      categoryInfo = JSON.parse(categoryInfo); 
+    } catch (error) {
+      categoryInfo = null;
+    }
+    if (categoryInfo && Array.isArray(categoryInfo) && categoryInfo.length > 0) {
+      //缓存已存在
+      this.getCacheCategoryData();
+    } else {
+      //缓存不存在
+      this.handleGetCategoryInfo(() => {
+        this.getCacheCategoryData();
+      });
+    }
+  },
+
+  /**
+   * 获取缓存分类数据
+   */
+  getCacheCategoryData() {
     try {
       let categoryInfo = wx.getStorageSync(constants.StorageKey_Category_Info);
       categoryInfo = JSON.parse(categoryInfo); 
@@ -342,6 +141,23 @@ Page({
         }
       })
     }
+  },
+
+  /**
+   * 接口拉取分类表，缓存分类表
+   */
+  handleGetCategoryInfo(successCallback) {
+    util.request(`${api.CategoryInfo}`).then(res => {
+      console.log('获取分类表成功！');
+      if (!res || !res.data) {
+        return;
+      }
+      if (Array.isArray(res.data)) {
+        console.log('缓存分类表成功！');
+        wx.setStorageSync(constants.StorageKey_Category_Info, JSON.stringify(res.data));
+        successCallback();
+      }
+    })
   },
 
   /**

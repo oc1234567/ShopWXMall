@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/cart/index",
     "pages/index/index",
     "pages/category/index/index",
     "pages/category/categoryList/index",
@@ -10,8 +11,7 @@
     "pages/activeDetail/index",
     "pages/checkout/index",
     "pages/address/addressList/index",
-    "pages/myCenter/orderList/index",
-    "pages/cart/index"
+    "pages/myCenter/orderList/index"
     
   ],
   "window": {

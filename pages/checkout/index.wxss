@@ -49,6 +49,34 @@ page {
   font-weight: 800;
 }
 
+.add-address-wrapper {
+  position: relative;
+  height: 120rpx;
+  line-height: 120rpx;
+  padding-left: 25rpx;
+  padding-right: 25rpx;
+  background-color: white;
+}
+
+.add-address-wrapper {
+  color: red;
+}
+
+.add-address-icon {
+  padding-right: 20rpx;
+}
+
+.add-address-arrow {
+  position: absolute;
+  right: 25rpx;
+}
+
+.shop-list-title-wrapper {
+  display: flex;
+  align-items: center; 
+  padding: 20rpx; 
+  background-color: white;
+}
 .shop-product-wrapper {
   display: grid;
   grid-template-columns: 210rpx 20rpx 1fr 20rpx 50rpx;

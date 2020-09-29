@@ -40,7 +40,7 @@ Page({
       that.setData({
         user_id: res.id,
       })
-      if (Array.isArray(res.orders)) {
+      if (Array.isArray(res.orders) && res.orders.length > 0) {
         console.log('用户订单列表存在');
         res.orders.forEach(order => {
           //--- order_list 添加 order ----
@@ -149,6 +149,10 @@ Page({
             }
           });
         });
+      } else {
+        that.setData({
+          is_ready: true,
+        })
       }
     });
   },

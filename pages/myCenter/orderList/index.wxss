@@ -141,11 +141,3 @@ page {
   font-weight: 500;
 }
 
-.padding-left {
-  padding-left: 25rpx;
-}
-
-.padding-right {
-  padding-right: 25rpx;
-}
-
