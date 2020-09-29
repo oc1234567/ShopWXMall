@@ -30,8 +30,8 @@ Page({
         if (products && Array.isArray(products)) {
           let all_num = 0;
           products.forEach(product => {
-            const { num } = product;
-            all_num += num;
+            const { product_num } = product;
+            all_num += product_num;
           })
           let payment = 0;
           if (options.payment) {
@@ -194,22 +194,21 @@ Page({
         //订单购物清单提交
         util.request(api.CreateOrderDetail, {
           'order_id': res.data.id,
-          'product_id': product.id,
-          'product_price': product.price,
+          'product_id': product.product_id,
+          'product_price': product.product_price,
           'product_size': product.size_id,
           'product_type': product.color_id,
-          'product_cnt': product.num,
+          'product_cnt': product.product_num,
         }, 'POST').then(res => {
           console.log('购物清单产品数据提交成功!');
           count --;
+          //需将已购商品移除购物车
+          cartUtil.removeCartList(product.id);
           if (count === 0) {
             //导航至订单列表页
             wx.navigateTo({
               url: '/pages/myCenter/orderList/index',
             })
-            //需将已购商品移除购物车
-            cartUtil.removeCartList();
-            cartUtil.addCartProducts();
           }
         })
       }) 

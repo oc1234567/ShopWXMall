@@ -38,65 +38,60 @@ Page({
   },
 
   /**
-   * 判断缓存是否存在购物车数据
+   * 获取购物车数据，更新本地缓存，更新data数据
    */
   getCartProductsData() {
-    let products;
-    try {
-      products = JSON.parse(wx.getStorageSync(constant.StorageKey_Cart_Data));
-      if (!products) {
-        products = [];
-      }
-    } catch (error) {
-      products = [];
-    }
-    if (products && Array.isArray(products) && products.length > 0) {
-      //缓存已存在
+    this.getCartProductsInfo(() => {
       this.getCacheCartProducts();
-    } else {
-      //缓存不存在
-      this.getCartProductsInfo(() => {
-        this.getCacheCartProducts();
-      })
-    }
+    })
   },
 
   /**
    * 缓存获取购物车数据
    */
   getCacheCartProducts() {
-    //获取购物车商品
-    let products;
+    //获取购物车商品 购物车商品应将最近加入的放置在最前面
+    let cart_products;
     try {
-      products = JSON.parse(wx.getStorageSync(constant.StorageKey_Cart_Data));
+      cart_products = JSON.parse(wx.getStorageSync(constant.StorageKey_Cart_Data));
       if (!products) {
-        products = [];
+        cart_products = [];
       }
     } catch (error) {
-      products = [];
+      cart_products = [];
     }
-    //判断是否有新加入商品
-    if (this.data.cart_goods.length <= products.length) {
-      products.forEach((product) => {
-        const index = this.data.cart_goods.findIndex(oldProduct => oldProduct.id === product.id && oldProduct.size_id === product.size_id && oldProduct.color_id === product.color_id && oldProduct.num === product.num);
+    
+    //更新选中状态
+    if (this.data.cart_goods.length <= cart_products.length) {
+      cart_products.forEach((cart_product) => {
+        const index = this.data.cart_goods.findIndex(oldCartProduct => oldCartProduct.product_id === cart_product.product_id && oldCartProduct.size_id === cart_product.size_id && oldCartProduct.color_id === cart_product.color_id && oldProduct.num === cart_product.num);
         if (index === -1) {
           //同种商品存在，数量发生变化
-          const oldProduct = this.data.cart_goods.find(oldProduct => oldProduct.id === product.id && oldProduct.size_id === product.size_id && oldProduct.color_id === product.color_id);
-          if (oldProduct) {
+          const oldCartProduct_index = this.data.cart_goods.findIndex(oldCartProduct => oldCartProduct.product_id === cart_product.product_id && oldCartProduct.size_id === cart_product.size_id && oldCartProduct.color_id === cart_product.color_id);
+          if (oldCartProduct_index !== -1) {
             oldProduct.num = product.num;
+            this.data.selected_state[oldCartProduct] = true;
           } else {
-            this.data.cart_goods.push(product);
-            this.data.selected_state.push(true);
+            this.data.selected_state.splice(0, 0, true);
           }
         }
       })
-      this.setData({
-        cart_goods: this.data.cart_goods,
-        selected_state: this.data.selected_state,
-        is_all_selected: this.updateIsAllSelected(this.data.selected_state),
-        all_payment_money: this.updatePaymentInfo(this.data.selected_state)
+    } else {
+      this.data.cart_goods.forEach((oldCartProduct, index) => {
+        const cart_product_index = cart_products.findIndex(cart_product => cart_product.id === oldCartProduct.id);
+        if (cart_product_index === -1) {
+          this.data.selected_state.slice(index, 1);
+        }
       })
     }
+
+    //更新购物车
+    this.setData({
+      cart_goods: products,
+      selected_state: this.data.selected_state,
+      is_all_selected: this.updateIsAllSelected(this.data.selected_state),
+      all_payment_money: this.updatePaymentInfo(this.data.selected_state)
+    })
   },
 
    /**

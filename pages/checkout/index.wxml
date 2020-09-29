@@ -17,11 +17,11 @@
     <text class="shop-list-text" space="nbsp">  购物清单</text>
   </view>
 <view wx:for="{{products}}" wx:for-item="product" class="shop-product-wrapper hairline hairline-top padding-left" wx:key="id">
-  <image class="shop-product-image" src="{{product.img}}" style="width:210rpx; height:210rpx"></image>
-  <text class="shop-product-name product-name text">{{product.name}}</text>
+  <image class="shop-product-image" src="{{product.product_img}}" style="width:210rpx; height:210rpx"></image>
+  <text class="shop-product-name product-name text">{{product.product_name}}</text>
   <text class="shop-product-size-color gray-text">{{product.size_name}}/{{product.color_name}}</text>
-  <text class="shop-product-price price">${{product.price}}</text>
-  <text class="shop-product-num">x{{product.num}}</text>
+  <text class="shop-product-price price">${{product.product_price}}</text>
+  <text class="shop-product-num">x{{product.product_num}}</text>
 </view>
 <view class="grid  hairline hairline-top">
   <text class="grid-left">买家留言</text><input class="grid-right" type="text" placeholder="给卖家留言(20字以内)" placeholder-class="gray-text"/>

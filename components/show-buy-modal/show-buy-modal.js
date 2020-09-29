@@ -1,5 +1,6 @@
 // components/show-buy-modal.js
-const { request }  = require('../../utils/util');
+const util = require('../../utils/util');
+const cartUtil = require('../../utils/cartUtil');
 const api = require('../../config/api');
 const constant = require('../../config/constant/index');
 
@@ -67,7 +68,7 @@ Component({
 
     //显示库存信息(尺码与颜色均选中)
     getProductCount(selected_color_id, selected_size_id) {
-      return request(`${api.GoodCount}?size_id=${selected_size_id}&color_id=${selected_color_id}&product_id=${this.properties.good_info.id}`);
+      return util.request(`${api.GoodCount}?size_id=${selected_size_id}&color_id=${selected_color_id}&product_id=${this.properties.good_info.id}`);
     },
 
     /**
@@ -125,12 +126,11 @@ Component({
         }
         //如果存在同ID同尺寸同颜色的产品，则合并产品数量
         if (Array.isArray(data) && data.length > 0) {
-          let product = data.find(item => item.id === this.properties.good_info.id && item.color_id === this.data.selected_color_id && item.size_id === this.data.selected_size_id);
-          if (product) {
-            product.num++;
-            wx.setStorageSync(constant.StorageKey_Cart_Data, JSON.stringify(data));
+          let cart_product = data.find(item => item.product_id === this.properties.good_info.id && item.color_id === this.data.selected_color_id && item.size_id === this.data.selected_size_id);
+          if (cart_product) {
+            cart_product.product_num++;
+            cartUtil.updateCartProduct(cart_product.id, cart_product.product_num);
             this.dismissModal();
-            console.log('加入购物车成功!');
             return;
           }
         }
@@ -139,21 +139,16 @@ Component({
           data = [];
         }
       }
-      data.push({
-        'id': this.properties.good_info.id,
-        'name': this.properties.good_info.name,
-        'img': this.properties.good_info.picUrl,
-        'price': this.properties.good_info.price,
-        'size_name': this.data.selected_size_name,
+      const cart_product = {
+        'customer_id': 1, //warn: 此处需要依据真实用户ID修改
+        'product_id': this.properties.good_info.id,
         'size_id': this.data.selected_size_id,
-        'color_name': this.data.selected_color_name,
         'color_id': this.data.selected_color_id,
-        'num': this.data.num
-      })
-      //更新购物车数据缓存
-      wx.setStorageSync(constant.StorageKey_Cart_Data, JSON.stringify(data));
-      this.dismissModal();
-      console.log('加入购物车成功!');      
+        'product_num': this.data.num
+      };
+      //提交产品至购物车
+      cartUtil.addCartProduct(cart_product);
+      this.dismissModal();    
     },
 
     /**
