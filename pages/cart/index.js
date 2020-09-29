@@ -20,7 +20,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.getCartProductsData();
+    // this.getCartProductsData();
   },
 
   /**
@@ -54,7 +54,7 @@ Page({
     let cart_products;
     try {
       cart_products = JSON.parse(wx.getStorageSync(constant.StorageKey_Cart_Data));
-      if (!products) {
+      if (!cart_products) {
         cart_products = [];
       }
     } catch (error) {
@@ -64,13 +64,13 @@ Page({
     //更新选中状态
     if (this.data.cart_goods.length <= cart_products.length) {
       cart_products.forEach((cart_product) => {
-        const index = this.data.cart_goods.findIndex(oldCartProduct => oldCartProduct.product_id === cart_product.product_id && oldCartProduct.size_id === cart_product.size_id && oldCartProduct.color_id === cart_product.color_id && oldProduct.num === cart_product.num);
+        const index = this.data.cart_goods.findIndex(oldCartProduct => oldCartProduct.product_id === cart_product.product_id && oldCartProduct.size_id === cart_product.size_id && oldCartProduct.color_id === cart_product.color_id && oldCartProduct.product_num === cart_product.product_num);
         if (index === -1) {
           //同种商品存在，数量发生变化
           const oldCartProduct_index = this.data.cart_goods.findIndex(oldCartProduct => oldCartProduct.product_id === cart_product.product_id && oldCartProduct.size_id === cart_product.size_id && oldCartProduct.color_id === cart_product.color_id);
           if (oldCartProduct_index !== -1) {
-            oldProduct.num = product.num;
-            this.data.selected_state[oldCartProduct] = true;
+            this.data.cart_goods[oldCartProduct_index].product_num = cart_product.product_num;
+            this.data.selected_state[oldCartProduct_index] = true;
           } else {
             this.data.selected_state.splice(0, 0, true);
           }
@@ -80,14 +80,14 @@ Page({
       this.data.cart_goods.forEach((oldCartProduct, index) => {
         const cart_product_index = cart_products.findIndex(cart_product => cart_product.id === oldCartProduct.id);
         if (cart_product_index === -1) {
-          this.data.selected_state.slice(index, 1);
+          this.data.selected_state.splice(index, 1);
         }
       })
     }
-
+    this.data.cart_goods = cart_products;
     //更新购物车
     this.setData({
-      cart_goods: products,
+      cart_goods: this.data.cart_goods,
       selected_state: this.data.selected_state,
       is_all_selected: this.updateIsAllSelected(this.data.selected_state),
       all_payment_money: this.updatePaymentInfo(this.data.selected_state)
@@ -98,7 +98,7 @@ Page({
     * 接口拉取购物车数据，缓存购物车数据
     */
    getCartProductsInfo(successCallback) {
-    cartUtil.getCartProducts().then(data => {
+    cartUtil.getCartProducts(data => {
       if (!data) {
         return;
       }
@@ -204,8 +204,8 @@ Page({
         continue;
       }
       const product = this.data.cart_goods[index];
-      const {num, price} = product;
-      allPaymentMoney += num * price;
+      const {product_num, product_price} = product;
+      allPaymentMoney += product_num * product_price;
     }
     return allPaymentMoney;
   },
@@ -259,11 +259,11 @@ Page({
   handleReduceNum(e) {
     const index = e.currentTarget.dataset.index;
     const product = this.data.cart_goods[index];
-    const { num } = product;
-    if (num === 1) {
+    const { product_num } = product;
+    if (product_num === 1) {
       return;
     }
-    product.num = num - 1;
+    product.product_num = product_num - 1;
       const is_selected = this.data.selected_state[index];
       if (!is_selected) {
         this.data.selected_state[index] = true;
@@ -282,13 +282,12 @@ Page({
    handleAddNum(e) {
     const index = e.currentTarget.dataset.index;
      const product = this.data.cart_goods[index];
-     const { num } = product;
-     //超出库存，提示已达最大库存 todo
-     const maxNum = 10; //10 需要被替换为真实库存数据 todo
-     if (num === maxNum) {
+     const { product_num, product_count } = product;
+     //超出库存，提示已达最大库存
+     if (product_num === product_count) {
        return;
      }
-     product.num = num + 1;
+     product.product_num = product_num + 1;
      const is_selected = this.data.selected_state[index];
       if (!is_selected) {
         this.data.selected_state[index] = true;

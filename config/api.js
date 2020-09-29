@@ -1,6 +1,6 @@
 const { AppId } = require("./constant/app_id");
 
-const API_BASE_URL = 'http://localhost:8080/api/';
+const API_BASE_URL = 'http://localhost:8889/api/';
 module.exports = {
     IndexUrlAllGoods: API_BASE_URL + 'products', //全部商品
     IndexUrl: API_BASE_URL + 'shop-index', //首页

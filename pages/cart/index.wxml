@@ -6,15 +6,15 @@
         <mp-icon wx:if="{{selected_state[index]}}" icon="done2" color="red" size="{{16}}"></mp-icon>
         <mp-icon wx:else icon="done2" color="gray" size="{{16}}"></mp-icon>
       </view>
-      <image class="product_image" src="{{product.img}}" style="width:210rpx; height:210rpx"></image>
-      <text class="product_name">{{product.name}}</text>
+      <image class="product_image" src="{{product.product_img}}" style="width:210rpx; height:210rpx"></image>
+      <text class="product_name">{{product.product_name}}</text>
       <text class="product_color_size">{{product.size_name}}/{{product.color_name}}</text>
-      <text class="product_price">{{product.price}}</text>
+      <text class="product_price">{{product.product_price}}</text>
       <view class="product_num_view">
         <view class="product-num-view-content">
-          <view class="product-num-item product_num_reduce {{product.num === 1 ? product_num_reduce_disable_class_name : product_num_reduce_enable_class_name}}" bindtap="handleReduceNum" data-productid="{{product.id}}" data-index="{{index}}">-</view>
-          <view class="product-num-item">{{product.num}}</view>
-          <view class="product-num-item product_num_add" bindtap="handleAddNum" data-productid="{{product.id}}" data-index="{{index}}">+</view>
+          <view class="product-num-item product_num_reduce {{product.product_num === 1 ? product_num_reduce_disable_class_name : product_num_reduce_enable_class_name}}" bindtap="handleReduceNum" data-index="{{index}}">-</view>
+          <view class="product-num-item">{{product.product_num}}</view>
+          <view class="product-num-item product_num_add {{product.product_num === product.product_count ? product_num_reduce_disable_class_name : product_num_reduce_enable_class_name}}" bindtap="handleAddNum" data-index="{{index}}">+</view>
         </view>
       </view>
     </view>
